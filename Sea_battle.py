@@ -17,7 +17,7 @@ class Ship:
     def get_start_coords(self):
         return self._x, self._y
 
-    def move(self, go: int):                # move ship
+    def move(self, go: int):                # move ship, example: -1 or 1
         if not self._is_move:
             print("Move isn't real, the ship is hit")
             return
@@ -46,14 +46,14 @@ class Ship:
 
     def is_out_pole(self, size=10):       # -> True, if there is going beyond borders
         for shift in range(self._length):
-            if not (0 <= self._x + shift * self._not_turn < SIZE_GAME_POLE and 0 <= self._y + shift * self._turn < SIZE_GAME_POLE):
+            if not (0 <= self._x + shift * self._not_turn < size and 0 <= self._y + shift * self._turn < size):
                 return True
         return False
 
-    def __getitem__(self, index):
+    def __getitem__(self, index):   # get condition ship cell
         return self._cells[index]
 
-    def __setitem__(self, index, value):
+    def __setitem__(self, index, value):  # set condition ship cell
         if value not in (1, 2):
             raise ValueError("Expected type int with: 1 or 2")
         self._cells[index] = value
@@ -72,5 +72,9 @@ SIZE_GAME_POLE = 10
 
 pole = GamePole(SIZE_GAME_POLE)
 ship_1 = Ship(4, tp=2, x=1, y=1)
+ship_2 = Ship(2, tp=2, x=3, y=2)
 pprint(ship_1.cells_ship_id)
 pprint(ship_1.cells_around_ship_id)
+print(ship_1.is_out_pole())
+
+print(ship_1.is_collide(ship_2))
