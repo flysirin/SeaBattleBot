@@ -2,7 +2,7 @@ from random import randint, choice
 
 
 class Ship:
-    def __init__(self, length, tp=1, x=None, y=None):
+    def __init__(self, length, tp=1, x=None, y=None, size=10):
         self._x, self._y = x, y
         self._tp = tp
         self._length = length  # number of decks
@@ -10,18 +10,16 @@ class Ship:
         self._cells = [1 for _ in range(length)]  # condition of ship: 1 or 2
         self._turn, self._not_turn = tp - 1, not (tp - 1)  # 1 or 0  - turning the ship
         self._ship_cells, self._around_ship = set(), set()
-        self._size = 10
-        if type(x) == int and type(y) == int:
+        self._size = size
+        if type(x) == int and type(y) == int and type(size) == int:
             self.cells_ship_id()
             self.cells_around_ship_id()
 
-    def set_size(self, size):
-        self._size = size
-
     def set_start_coords(self, x, y):
         self._x, self._y = x, y
-        self.cells_ship_id()
-        self.cells_around_ship_id()
+        if self._size:
+            self.cells_ship_id()
+            self.cells_around_ship_id()
 
     def get_start_coords(self):
         return self._x, self._y
@@ -85,12 +83,12 @@ class GamePole:
 
     def init(self):
         def lineup_ships():
-            ships_start_init = [Ship(4, tp=randint(1, 2)), Ship(3, tp=randint(1, 2)), Ship(3, tp=randint(1, 2)),
-                                Ship(2, tp=randint(1, 2)), Ship(2, tp=randint(1, 2)), Ship(2, tp=randint(1, 2)),
-                                Ship(1, tp=randint(1, 2)), Ship(1, tp=randint(1, 2)), Ship(1, tp=randint(1, 2)),
-                                Ship(1, tp=randint(1, 2))]
+            ships_start_init = [Ship(4, tp=randint(1, 2), size=self._size), Ship(3, tp=randint(1, 2), size=self._size),
+                                Ship(3, tp=randint(1, 2), size=self._size), Ship(2, tp=randint(1, 2), size=self._size),
+                                Ship(2, tp=randint(1, 2), size=self._size), Ship(2, tp=randint(1, 2), size=self._size),
+                                Ship(1, tp=randint(1, 2), size=self._size), Ship(1, tp=randint(1, 2), size=self._size),
+                                Ship(1, tp=randint(1, 2), size=self._size), Ship(1, tp=randint(1, 2), size=self._size)]
             [ship.set_start_coords(x=randint(0, self._c_size), y=randint(0, self._c_size)) for ship in ships_start_init]
-            [ship.set_size(self._size) for ship in ships_start_init]
             self._ships = []
             count = 0
             for ship in ships_start_init:
@@ -114,7 +112,7 @@ class GamePole:
         return self._ships
 
     def _upd_pole(self):
-        self._pole = [[0 for _ in range(self.size())] for _ in range(self.size())]
+        self._pole = [[0 for _ in range(self._size)] for _ in range(self._size)]
         for ship in self._ships:
             x_0, y_0 = ship.get_start_coords()
             turn, not_turn = ship._turn, ship._not_turn
@@ -134,7 +132,7 @@ class GamePole:
         if not ship._is_move:
             return False
         last_ships = [l_ship for l_ship in self._ships if l_ship != ship]
-        go_ship = Ship(ship._length, ship._tp, ship._x, ship._y)
+        go_ship = Ship(ship._length, ship._tp, ship._x, ship._y, size=self._size)
         go_ship.move(distance)
         for another_ship in last_ships:
             if go_ship.is_out_pole(self._size) or another_ship.is_collide(go_ship):
@@ -151,7 +149,7 @@ class GamePole:
         self._upd_pole()
 
 
-SIZE_GAME_POLE = 7  # constanta
+# SIZE_GAME_POLE = 7  # constanta
 # ship_1 = Ship(4, tp=2, x=1, y=1)
 # ship_2 = Ship(2, tp=2, x=3, y=2)
 # ship_1.cells_ship_id()
@@ -160,7 +158,7 @@ SIZE_GAME_POLE = 7  # constanta
 # pprint(ship_1._around_ship)
 # print(ship_1.is_out_pole())
 # print(ship_1.is_collide(ship_2))
-pole = GamePole(10)
+pole = GamePole(8)
 pole.init()
 print(pole.get_ships())
 pole.show()
