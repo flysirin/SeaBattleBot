@@ -26,10 +26,6 @@ class Ship:
     def get_start_coords(self):
         return self._x, self._y
 
-    @property
-    def turn(self):
-        return self._turn, self._not_turn
-
     def move(self, go: int):  # move ship, example: -1 or 1
         if any(x == 2 for x in self._cells):
             self._is_move = False
@@ -121,7 +117,7 @@ class GamePole:
         self._pole = [[0 for _ in range(self.size())] for _ in range(self.size())]
         for ship in self._ships:
             x_0, y_0 = ship.get_start_coords()
-            turn, not_turn = ship.turn
+            turn, not_turn = ship._turn, ship._not_turn
             c = 0
             for cell_ship in ship:
                 self._pole[y_0 + c * turn][x_0 + c * not_turn] = cell_ship
@@ -150,8 +146,8 @@ class GamePole:
             go_trip = choice((-1, 1))
             if self._can_move(ship, go_trip):
                 ship.move(go_trip)
-            elif self._can_move(ship, not go_trip):
-                ship.move(not go_trip)
+            elif self._can_move(ship, -go_trip):
+                ship.move(-go_trip)
         self._upd_pole()
 
 
@@ -164,15 +160,15 @@ SIZE_GAME_POLE = 7  # constanta
 # pprint(ship_1._around_ship)
 # print(ship_1.is_out_pole())
 # print(ship_1.is_collide(ship_2))
-# pole = GamePole(SIZE_GAME_POLE)
-# pole.init()
-# print(pole.get_ships())
-# pole.show()
-# pole.move_ships()
-# print()
-# pole.show()
-# print()
-# print(pole.get_ships())
+pole = GamePole(10)
+pole.init()
+print(pole.get_ships())
+pole.show()
+pole.move_ships()
+print()
+pole.show()
+print()
+print(pole.get_ships())
 
 
 ship = Ship(2)
