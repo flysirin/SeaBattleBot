@@ -17,9 +17,8 @@ class Ship:
 
     def set_start_coords(self, x, y):
         self._x, self._y = x, y
-        if self._size:
-            self.cells_ship_id()
-            self.cells_around_ship_id()
+        self.cells_ship_id()
+        self.cells_around_ship_id()
 
     def get_start_coords(self):
         return self._x, self._y
