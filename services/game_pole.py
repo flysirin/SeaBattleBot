@@ -1,8 +1,7 @@
-from random import randint, choice
 import pygame
 import sys
 from string import ascii_uppercase as asci
-from Sea_battle import Ship, GamePole
+from services.Sea_battle_v_1 import GamePole
 
 
 pygame.init()

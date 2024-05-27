@@ -1,3 +1,5 @@
 .gitignore
 .idea
 .venv
+tests
+services/Sea_battle_v_1.py

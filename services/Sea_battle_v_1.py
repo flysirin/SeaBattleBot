@@ -2,7 +2,7 @@ from random import randint, choice
 
 
 class Ship:
-    def __init__(self, length, tp=1, x=None, y=None, size=10):
+    def __init__(self, length, tp: [1, 2] = 1, x=None, y=None, size=10):
         self._x, self._y = x, y
         self._tp = tp
         self._length = length  # number of decks
@@ -11,7 +11,7 @@ class Ship:
         self._turn, self._not_turn = tp - 1, not (tp - 1)  # 1 or 0  - turning the ship
         self._ship_cells, self._around_ship = set(), set()
         self._size = size
-        if type(x) == int and type(y) == int and type(size) == int:
+        if type(x) is int and type(y) is int:
             self.cells_ship_id()
             self.cells_around_ship_id()
 
@@ -146,6 +146,7 @@ class GamePole:
             elif self._can_move(ship, -go_trip):
                 ship.move(-go_trip)
         self._upd_pole()
+
 
 pole = GamePole(8)
 pole.init()
