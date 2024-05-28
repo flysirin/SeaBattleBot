@@ -1,7 +1,10 @@
+import asyncio
+
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
-DATABASE_URL = "sqlite:///users_sqlite.db"
+# DATABASE_URL = "sqlite:///users_sqlite.db"
+DATABASE_URL = "sqlite+aiosqlite:///./test.db"
 
 engine = create_async_engine(DATABASE_URL, echo=True)
 SessionLocal = sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)
@@ -17,3 +20,6 @@ async def get_db():
     """context manager for automatic open and close db session"""
     async with SessionLocal() as session:
         yield session
+
+
+asyncio.run(init_db())
