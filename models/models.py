@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, LargeBinary
-from sqlalchemy.orm import relationship
-from database import Base
+from sqlalchemy.orm import relationship, declarative_base
+
+Base = declarative_base()
 
 
 class User(Base):
@@ -13,7 +14,6 @@ class User(Base):
     user_game_field = Column(LargeBinary)
     bot_game_field = Column(LargeBinary)
     # ship = relationship("Ship", back_populates="owner")
-
 
 # class Ship(Base):
 #     __tablename__ = 'ship'

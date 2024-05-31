@@ -1,31 +1,33 @@
 import asyncio
 import logging
 from aiogram import Bot, Dispatcher
+from aiogram.fsm.storage.memory import MemoryStorage
 from handlers import user_handlers  # , other_handlers
 from keyboards.set_menu import set_main_menu
 from config_data.config import BOT_TOKEN
-from models.database import get_db, init_db
-# from models.models import User
-
+from models.database import init_models
+from models.methods import on_startup, on_shutdown
 
 logger = logging.getLogger(__name__)
-
-
-# async def on_startup(dispatcher: Dispatcher):
-#     session = next(get_db())
-#     users_data = await session.query(User).all()
 
 
 
 
 async def main():
+    bot = Bot(token=BOT_TOKEN, parse_mode=None)
     logging.basicConfig(level=logging.INFO,
                         format='%(filename)s:%(lineno)d #%(levelname)-8s '
                                '[%(asctime)s] - %(name)s - %(message)s')
 
     logger.info("Starting bot")
-    bot = Bot(token=BOT_TOKEN, parse_mode=None)
-    dp = Dispatcher()
+
+    await init_models()
+
+
+    dp = Dispatcher(storage=MemoryStorage())
+
+    dp.startup.register(on_startup)
+    dp.shutdown.register(on_shutdown)
 
     dp.include_router(user_handlers.user_router)
     # dp.include_router(other_handlers.router)

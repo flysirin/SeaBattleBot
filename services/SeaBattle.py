@@ -70,7 +70,7 @@ class Ship:
         return f"s{self._length, self._x, self._y},tp={self._tp}"
 
 
-class GamePole:
+class Game:
     def __init__(self, size=10, ships: list[Ship] = None):
         self._size = size
         self._c_size = size - 1  # coordinates size
@@ -147,12 +147,12 @@ class GamePole:
         self._upd_pole()
 
 
-pole = GamePole(10)
-pole.init()
-print(pole.get_ships())
-pole.show()
-pole.move_ships()
-print()
-pole.show()
-print()
-print(pole.get_ships())
+# pole = Game(10)
+# pole.init()
+# print(pole.get_ships())
+# pole.show()
+# pole.move_ships()
+# print()
+# pole.show()
+# print()
+# print(pole.get_ships())
