@@ -11,8 +11,6 @@ from models.methods import on_startup, on_shutdown
 logger = logging.getLogger(__name__)
 
 
-
-
 async def main():
     bot = Bot(token=BOT_TOKEN, parse_mode=None)
     logging.basicConfig(level=logging.INFO,
@@ -22,7 +20,6 @@ async def main():
     logger.info("Starting bot")
 
     await init_models()
-
 
     dp = Dispatcher(storage=MemoryStorage())
 
