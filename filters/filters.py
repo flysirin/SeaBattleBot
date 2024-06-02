@@ -8,7 +8,7 @@ from aiogram.fsm.context import FSMContext
 
 class UserFilter(BaseFilter):
     async def __call__(self, message: Message) -> bool:
-        await add_user_to_cur_session(user_id=message.from_user.id)
+        await add_user_to_cur_session(user_id=message.from_user.id, username=message.from_user.username)
         return True
 
 
