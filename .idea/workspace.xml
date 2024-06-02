@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6c502de6-6a1a-431b-9dd4-d9725cac72fe" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/filters/filters.py" beforeDir="false" afterPath="$PROJECT_DIR$/filters/filters.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/methods.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +50,7 @@
     "Python.methods_test.executor": "Run",
     "Python.test_algoritm.executor": "Run",
     "Python.test_db_crud.executor": "Run",
+    "Python.test_drow_image.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
@@ -70,30 +71,7 @@
       <recent name="C:\python_projects\SeaBattleBot\models" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
-    <configuration name="database" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Sea Battle" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/models" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/models/database.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.test_drow_image">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Sea Battle" />
       <option name="ENV_FILES" value="" />
@@ -188,8 +166,31 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test_drow_image" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Sea Battle" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/test_drow_image.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Python.database" />
+      <item itemvalue="Python.test_drow_image" />
       <item itemvalue="Python.main" />
       <item itemvalue="Python.on_start_shutdown" />
       <item itemvalue="Python.methods_test (1)" />
@@ -197,11 +198,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.test_drow_image" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.methods_test (1)" />
         <item itemvalue="Python.test_algoritm" />
         <item itemvalue="Python.on_start_shutdown" />
-        <item itemvalue="Python.database" />
       </list>
     </recent_temporary>
   </component>
@@ -231,7 +232,7 @@
       <workItem from="1717158014616" duration="24295000" />
       <workItem from="1717242210499" duration="4951000" />
       <workItem from="1717249092388" duration="38000" />
-      <workItem from="1717306789333" duration="22132000" />
+      <workItem from="1717306789333" duration="25408000" />
     </task>
     <servers />
   </component>
@@ -248,6 +249,7 @@
     <SUITE FILE_PATH="coverage/SeaBattleBot$SeaBattle.coverage" NAME="SeaBattle Coverage Results" MODIFIED="1716836945044" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/services" />
     <SUITE FILE_PATH="coverage/SeaBattleBot$database.coverage" NAME="database Coverage Results" MODIFIED="1717171256669" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/models" />
     <SUITE FILE_PATH="coverage/SeaBattleBot$game_pole.coverage" NAME="game_pole Coverage Results" MODIFIED="1716551330743" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/SeaBattleBot$main.coverage" NAME="main Coverage Results" MODIFIED="1717336796824" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/SeaBattleBot$test_drow_image.coverage" NAME="test_drow_image Coverage Results" MODIFIED="1717354426812" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/SeaBattleBot$main.coverage" NAME="main Coverage Results" MODIFIED="1717336969998" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

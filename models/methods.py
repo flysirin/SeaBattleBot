@@ -1,12 +1,10 @@
 import pickle
-
 from aiogram import Dispatcher, Bot
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.storage.base import BaseStorage, StorageKey
 from aiogram.fsm.state import default_state, State
 from aiogram.fsm.storage.memory import MemoryStorage
 from sqlalchemy import select, update, insert
-from config_data.config import BOT_TOKEN, CUR_SESSION_ID
 from states.user_states import FSMUser
 from models.database import async_session
 from config_data.config_bot import bot_obj, bot_storage_key
