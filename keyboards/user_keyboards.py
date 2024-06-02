@@ -1,8 +1,17 @@
-from aiogram.types import (InlineKeyboardMarkup, InlineKeyboardButton)
+from aiogram.types import (InlineKeyboardMarkup, InlineKeyboardButton,
+                           ReplyKeyboardMarkup, KeyboardButton)
 from aiogram.utils.keyboard import InlineKeyboardBuilder
+from lexicon.lexicon import USER_BUTTONS
 
 
-# from lexicon.lexicon import HOST_BUTTONS
+def user_keyboard() -> ReplyKeyboardMarkup:
+    start_game = KeyboardButton(text=USER_BUTTONS['new_game'])
+    end_game = KeyboardButton(text=USER_BUTTONS['end_game'])
+    settings = KeyboardButton(text=USER_BUTTONS['settings'])
+    keyboard = ReplyKeyboardMarkup(keyboard=[[start_game], [end_game], [settings]],
+                                   one_time_keyboard=True,
+                                   resize_keyboard=True)
+    return keyboard
 
 
 def test_inline_kb(**kwargs) -> InlineKeyboardMarkup:

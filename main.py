@@ -1,12 +1,12 @@
 import asyncio
 import logging
 from aiogram import Bot, Dispatcher
-from aiogram.fsm.storage.memory import MemoryStorage
 from handlers import user_handlers  # , other_handlers
 from keyboards.set_menu import set_main_menu
 from config_data.config import BOT_TOKEN
 from models.database import init_models
-from models.methods import on_startup, on_shutdown
+from models.methods import storage
+from models.on_start_shutdown import on_startup, on_shutdown
 
 logger = logging.getLogger(__name__)
 
@@ -21,7 +21,7 @@ async def main():
 
     await init_models()
 
-    dp = Dispatcher(storage=MemoryStorage())
+    dp = Dispatcher(storage=storage)
 
     dp.startup.register(on_startup)
     dp.shutdown.register(on_shutdown)

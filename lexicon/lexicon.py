@@ -11,3 +11,9 @@ USER_LEXICON: dict[str, str] = {
              'From 7 to 10, but from 9 to 10 - you must enter id cols and rows',
 }
 
+USER_BUTTONS: dict[str, str] = {
+    'new_game': 'New game',
+    'end_game': 'End game',
+    'settings': 'Settings',
+
+}
