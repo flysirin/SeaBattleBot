@@ -1,8 +1,0 @@
-.gitignore
-.idea
-.venv
-tests
-services/Sea_battle_v_1.py
-My_diary_SeaBattleBot
-test.db
-methods_test.py
