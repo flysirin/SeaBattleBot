@@ -71,7 +71,7 @@
       <recent name="C:\python_projects\SeaBattleBot\models" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.battle_board_image">
+  <component name="RunManager" selected="Python.main">
     <configuration name="battle_board_image" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Sea Battle" />
       <option name="ENV_FILES" value="" />
@@ -198,9 +198,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main" />
         <item itemvalue="Python.battle_board_image" />
         <item itemvalue="Python.test_drow_image" />
-        <item itemvalue="Python.main" />
         <item itemvalue="Python.methods_test (1)" />
         <item itemvalue="Python.test_algoritm" />
       </list>
@@ -235,7 +235,8 @@
       <workItem from="1717306789333" duration="27211000" />
       <workItem from="1717443888964" duration="755000" />
       <workItem from="1717502473950" duration="8715000" />
-      <workItem from="1717514839571" duration="699000" />
+      <workItem from="1717514839571" duration="2263000" />
+      <workItem from="1717581825148" duration="2536000" />
     </task>
     <servers />
   </component>
@@ -247,12 +248,12 @@
     <SUITE FILE_PATH="coverage/SeaBattleBot$test_db_crud.coverage" NAME="test_db_crud Coverage Results" MODIFIED="1716923325302" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/SeaBattleBot$game_pole.coverage" NAME="game_pole Coverage Results" MODIFIED="1716551330743" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/SeaBattleBot$test_drow_image.coverage" NAME="test_drow_image Coverage Results" MODIFIED="1717505739104" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/SeaBattleBot$main.coverage" NAME="main Coverage Results" MODIFIED="1717336969998" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/SeaBattleBot$main.coverage" NAME="main Coverage Results" MODIFIED="1717582068122" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/SeaBattleBot$methods.coverage" NAME="methods Coverage Results" MODIFIED="1717184466542" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/models" />
     <SUITE FILE_PATH="coverage/SeaBattleBot$Sea_battle.coverage" NAME="Sea_battle Coverage Results" MODIFIED="1716833838282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/services" />
     <SUITE FILE_PATH="coverage/SeaBattleBot$methods_test__1_.coverage" NAME="methods_test (1) Coverage Results" MODIFIED="1717336530321" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/SeaBattleBot$test_algoritm.coverage" NAME="test_algoritm Coverage Results" MODIFIED="1717187643933" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/SeaBattleBot$battle_board_image.coverage" NAME="battle_board_image Coverage Results" MODIFIED="1717514376130" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/services" />
+    <SUITE FILE_PATH="coverage/SeaBattleBot$battle_board_image.coverage" NAME="battle_board_image Coverage Results" MODIFIED="1717581861569" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/services" />
     <SUITE FILE_PATH="coverage/SeaBattleBot$SeaBattle.coverage" NAME="SeaBattle Coverage Results" MODIFIED="1716836945044" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/services" />
     <SUITE FILE_PATH="coverage/SeaBattleBot$database.coverage" NAME="database Coverage Results" MODIFIED="1717171256669" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/models" />
   </component>
