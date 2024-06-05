@@ -107,9 +107,6 @@ class Game:
             lineup_ships()
         self._upd_field()
 
-    def get_ships(self):
-        return self._ships
-
     def _upd_field(self):
         self._field = [[0 for _ in range(self._size)] for _ in range(self._size)]
         for ship in self._ships:
@@ -120,7 +117,7 @@ class Game:
                 self._field[y_0 + c * turn][x_0 + c * not_turn] = cell_ship
                 c += 1
 
-    def get_field(self):
+    def get_field_with_ships(self):
         return tuple(tuple(x) for x in self._field)
 
     def get_miss_field(self):
@@ -146,18 +143,18 @@ class Game:
                 ship.move(-go_trip)
         self._upd_field()
 
-    def get_ship_by_cell_id(self, cell_id: int):
+    def _get_ship_by_cell_id(self, cell_id: int):
         if self._ships:
             for ship in self._ships:
                 if cell_id in ship.ship_cells:
                     return ship
 
     def damage_register(self, x: int, y: int):
-        """x,y ∈ [1-field_size]"""
+        """x,y ∈ [1-field_size]. 1 - for ship, 2 - for damage, 3 - for miss"""
         if not (1 <= x <= self._size and 1 <= y <= self._size):
             return
         cell_id = (y - 1) * self._size + x
-        ship = self.get_ship_by_cell_id(cell_id)
+        ship = self._get_ship_by_cell_id(cell_id)
         if ship:
             ship._is_move = False
             num_cell_id = sorted(ship.ship_cells).index(cell_id)
@@ -165,6 +162,27 @@ class Game:
             self._upd_field()
         else:
             self._miss_field[y - 1][x - 1] = 3
+
+    def get_field_for_owner(self):
+        res_field = [[0 for _ in range(self._size)] for _ in range(self._size)]
+        for y in range(self._size):
+            for x in range(self._size):
+                if self._field[y][x] in (1, 2):
+                    res_field[y][x] = self._field[y][x]
+                else:
+                    res_field[y][x] = self._miss_field[y][x]
+        return res_field
+
+    def get_field_for_enemy(self):
+        res_field = [[0 for _ in range(self._size)] for _ in range(self._size)]
+        for y in range(self._size):
+            for x in range(self._size):
+                if self._field[y][x] == 2:
+                    res_field[y][x] = 2
+                else:
+                    res_field[y][x] = self._miss_field[y][x]
+        return res_field
+
 
 # pole = Game(10)
 # pole.init()
