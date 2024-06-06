@@ -78,6 +78,7 @@ class Game:
         self._field = [[0 for _ in range(size)] for _ in range(size)]
         self._miss_field = [[0 for _ in range(size)] for _ in range(size)]
 
+    @property
     def size(self):
         return self._size
 
@@ -117,10 +118,10 @@ class Game:
                 self._field[y_0 + c * turn][x_0 + c * not_turn] = cell_ship
                 c += 1
 
-    def get_field_with_ships(self):
+    def _get_field_with_ships(self):
         return tuple(tuple(x) for x in self._field)
 
-    def get_miss_field(self):
+    def _get_miss_field(self):
         return tuple(tuple(x) for x in self._miss_field)
 
     def _can_move(self, ship: Ship, distance: int):
@@ -163,7 +164,7 @@ class Game:
         else:
             self._miss_field[y - 1][x - 1] = 3
 
-    def get_field_for_owner(self):
+    def get_field_for_owner(self) -> list[list[int]]:
         res_field = [[0 for _ in range(self._size)] for _ in range(self._size)]
         for y in range(self._size):
             for x in range(self._size):
@@ -173,7 +174,7 @@ class Game:
                     res_field[y][x] = self._miss_field[y][x]
         return res_field
 
-    def get_field_for_enemy(self):
+    def get_field_for_enemy(self) -> list[list[int]]:
         res_field = [[0 for _ in range(self._size)] for _ in range(self._size)]
         for y in range(self._size):
             for x in range(self._size):
