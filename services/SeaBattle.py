@@ -57,6 +57,9 @@ class Ship:
                 return True
         return False
 
+    def is_death(self):
+        return all(cell == 2 for cell in self.cells_state)
+
     def __getitem__(self, index):  # get condition ship cell
         return self.cells_state[index]
 
@@ -77,6 +80,9 @@ class Game:
         self._ships = ships if ships else []
         self._field = [[0 for _ in range(size)] for _ in range(size)]
         self._miss_field = [[0 for _ in range(size)] for _ in range(size)]
+        self.support_free_cells: set = set(range(1, size * size + 1))
+        self.damage_cells: set = set()
+        self.alive_ship_list = [4, 3, 3, 2, 2, 2, 1, 1, 1, 1]
 
     @property
     def size(self):
@@ -150,19 +156,27 @@ class Game:
                 if cell_id in ship.ship_cells:
                     return ship
 
-    def damage_register(self, x: int, y: int):
+    def damage_register(self, x: int = None, y: int = None, cell_id: int = None):
         """x,y ∈ [1-field_size]. 1 - for ship, 2 - for damage, 3 - for miss"""
-        if not (1 <= x <= self._size and 1 <= y <= self._size):
-            return
-        cell_id = (y - 1) * self._size + x
+        if x and y:
+            cell_id = (y - 1) * self._size + x
+        elif cell_id:
+            y = cell_id // self._size if cell_id >= self._size else 1
+            x = cell_id % self._size if cell_id != self._size * self._size else self._size
+
         ship = self._get_ship_by_cell_id(cell_id)
         if ship:
             ship._is_move = False
             num_cell_id = sorted(ship.ship_cells).index(cell_id)
             ship.cells_state[num_cell_id] = 2
             self._upd_field()
+            self.damage_cells.add(cell_id)
+            return ship
         else:
             self._miss_field[y - 1][x - 1] = 3
+            if cell_id in self.support_free_cells:
+                self.support_free_cells.remove(cell_id)
+            return
 
     def get_field_for_owner(self) -> list[list[int]]:
         res_field = [[0 for _ in range(self._size)] for _ in range(self._size)]
@@ -183,7 +197,6 @@ class Game:
                 else:
                     res_field[y][x] = self._miss_field[y][x]
         return res_field
-
 
 # pole = Game(10)
 # pole.init()

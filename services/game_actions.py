@@ -1,7 +1,7 @@
 from services.SeaBattle import Game
 from services.battle_board_image import BattleBoardImage
 from PIL import Image
-from random import randint
+from random import randint, choice
 
 
 def game_action(x_owner_hit=None, y_owner_hit=None,
@@ -38,15 +38,63 @@ def game_action(x_owner_hit=None, y_owner_hit=None,
     return image
 
 
-game_1 = Game(10)
-game_2 = Game(10)
-game_1.init()
-game_2.init()
+def do_bot_action_hit_level_2(user_game_field: Game):
+    # if not damages ships
+    if not user_game_field.damage_cells and user_game_field.alive_ship_list:
+        cell_id = choice(list(user_game_field.support_free_cells))
+        ship = user_game_field.damage_register(cell_id=cell_id)
+        if ship:
+            if ship.is_death():
+                remove_cells_death_ship(user_game_field, ship)
 
-image1 = None
-for i in range(400):
-    image1 = game_action(randint(1, 10), randint(1, 10),
-                randint(1, 10), randint(1, 10),
-                         game_1, game_2)
+    # damage ship
+    elif user_game_field.alive_ship_list:
+        if len(user_game_field.damage_cells) == 1:
+            damage_cell_id = list(user_game_field.damage_cells)[0]
+            next_cell_id = get_next_hit_by_one_damage_cell(game_field=user_game_field,
+                                                       damage_cell_id=damage_cell_id)
+            if next_cell_id is None:
+                next_cell_id = choice(list(user_game_field.support_free_cells))
 
-image1.save('image1.png')
+            ship = user_game_field.damage_register(cell_id=next_cell_id)
+            if ship.is_death():
+                remove_cells_death_ship(user_game_field, ship)
+
+        elif 1 < len(user_game_field.damage_cells):
+            pass
+
+
+def get_next_hit_by_one_damage_cell(game_field: 'Game', damage_cell_id: int) -> int:
+    next_cell_id = damage_cell_id + 1
+    if next_cell_id not in game_field.support_free_cells:
+        next_cell_id = damage_cell_id - 1
+    elif next_cell_id not in game_field.support_free_cells:
+        next_cell_id = damage_cell_id + 10
+    elif next_cell_id not in game_field.support_free_cells:
+        next_cell_id = damage_cell_id - 10
+    elif next_cell_id not in game_field.support_free_cells:
+        next_cell_id = None
+    return next_cell_id
+
+
+def remove_cells_death_ship(game_field: 'Game', ship:'Ship') -> None:
+    for cell_id in ship.cells_around_ship_id():
+        if cell_id in game_field.support_free_cells:
+            game_field.support_free_cells.remove(cell_id)
+    game_field.alive_ship_list.remove(len(game_field.damage_cells))
+    game_field.damage_cells.clear()
+
+# game_1 = Game(10)
+# game_2 = Game(10)
+# game_1.init()
+# game_2.init()
+#
+# image1 = None
+# for i in range(500):
+#     image1 = game_action(randint(1, 10), randint(1, 10),
+#                          randint(1, 10), randint(1, 10),
+#                          game_1, game_2)
+#     game_1.move_ships()
+#     game_2.move_ships()
+# image1.save('image1.png')
+
