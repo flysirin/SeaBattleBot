@@ -54,8 +54,8 @@ def do_bot_action_hit_level_2(user_game_field: Game):
     elif user_game_field.alive_ships:
         if len(user_game_field.damage_cells) == 1:
             next_cell_id = get_next_hit_by_one_damage_cell(game_field=user_game_field)
-            if next_cell_id is None:
-                next_cell_id = choice(list(user_game_field.excluded_miss_cells))
+            # if next_cell_id is None:
+            #     next_cell_id = choice(list(user_game_field.excluded_miss_cells))
 
             ship = user_game_field.damage_register(cell_id=next_cell_id)
             if ship and ship.is_death():
@@ -64,8 +64,8 @@ def do_bot_action_hit_level_2(user_game_field: Game):
         elif 1 < len(user_game_field.damage_cells):
             next_cell_id = get_next_hit_by_few_damage_cells(game_field=user_game_field)
 
-            if next_cell_id is None:
-                next_cell_id = choice(list(user_game_field.excluded_miss_cells))
+            # if next_cell_id is None:
+            #     next_cell_id = choice(list(user_game_field.excluded_miss_cells))
 
             ship = user_game_field.damage_register(cell_id=next_cell_id)
             if ship and ship.is_death():
@@ -76,10 +76,14 @@ def do_bot_action_hit_level_2(user_game_field: Game):
 
 
 def get_next_hit_by_one_damage_cell(game_field: 'Game') -> int | None:
+    size_field = game_field.size
     damage_cell_id = list(game_field.damage_cells)[0]
+    next_cell_1 = damage_cell_id + 1 if damage_cell_id % size_field != 0 else damage_cell_id - 1
+    next_cell_2 = damage_cell_id - 1 if damage_cell_id % size_field != 1 else damage_cell_id + 1
 
-    possible_next_cells = [damage_cell_id + 1, damage_cell_id - 1,
-                           damage_cell_id + 10, damage_cell_id - 10]
+    possible_next_cells = [next_cell_1, next_cell_2,
+                           damage_cell_id + size_field,
+                           damage_cell_id - size_field]
     for next_cell_id in possible_next_cells:
         if next_cell_id in game_field.excluded_miss_cells:
             return next_cell_id
@@ -91,19 +95,33 @@ def get_next_hit_by_one_damage_cell(game_field: 'Game') -> int | None:
 
 def get_next_hit_by_few_damage_cells(game_field: 'Game') -> int | None:
     cell_ids: list = sorted(game_field.damage_cells)
-    next_cell_id = None
+    # next_cell_id = None
     if cell_ids[1] - cell_ids[0] == 1:
-        next_cell_id = max(cell_ids) + 1
-        if next_cell_id not in game_field.excluded_miss_cells:
-            next_cell_id = min(cell_ids) - 1
+        possible_next_cells = [max(cell_ids) + 1, min(cell_ids) - 1]
+
+        for next_cell_id in possible_next_cells:
+            if next_cell_id in game_field.excluded_miss_cells:
+                return next_cell_id
+        for next_cell_id in possible_next_cells:
+            if next_cell_id in game_field.excluded_death_cells:
+                return next_cell_id
+
+        # next_cell_id = max(cell_ids) + 1
+        # if next_cell_id not in game_field.excluded_miss_cells:
+        #     next_cell_id = min(cell_ids) - 1
 
     elif cell_ids[1] - cell_ids[0] == game_field.size:
-        next_cell_id = max(cell_ids) + game_field.size
-        if next_cell_id not in game_field.excluded_miss_cells:
-            next_cell_id = min(cell_ids) - game_field.size
+        possible_next_cells = [max(cell_ids) + game_field.size, min(cell_ids) - game_field.size]
 
-    if (next_cell_id in game_field.excluded_miss_cells) or (next_cell_id in game_field.excluded_death_cells):
-        return next_cell_id
+        for next_cell_id in possible_next_cells:
+            if next_cell_id in game_field.excluded_miss_cells:
+                return next_cell_id
+        for next_cell_id in possible_next_cells:
+            if next_cell_id in game_field.excluded_death_cells:
+                return next_cell_id
+
+    # if (next_cell_id in game_field.excluded_miss_cells) or (next_cell_id in game_field.excluded_death_cells):
+    #     return next_cell_id
 
 
 def remove_cells_death_ship(game_field: 'Game', ship: 'Ship') -> None:
@@ -114,7 +132,6 @@ def remove_cells_death_ship(game_field: 'Game', ship: 'Ship') -> None:
     if length_ship in game_field.alive_ships:
         game_field.alive_ships.remove(length_ship)
     game_field.damage_cells.clear()
-    print(ship._around_ship)
 
 
 game_1 = Game(10)
@@ -123,11 +140,13 @@ game_1.init()
 game_2.init()
 
 image1 = None
-for i in range(50):
+for i in range(100):
     image1 = game_action(randint(1, 10), randint(1, 10),
                          game_1, game_2)
     game_1.move_ships()
     game_2.move_ships()
 image1.save('image1.png')
 print(game_1.excluded_miss_cells)
+print(game_1.excluded_death_cells)
 print(game_1.alive_ships)
+print(game_1.damage_cells)
