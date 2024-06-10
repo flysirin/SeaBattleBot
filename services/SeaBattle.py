@@ -80,9 +80,10 @@ class Game:
         self._ships = ships if ships else []
         self._field = [[0 for _ in range(size)] for _ in range(size)]
         self._miss_field = [[0 for _ in range(size)] for _ in range(size)]
-        self.support_free_cells: set = set(range(1, size * size + 1))
+        self.excluded_miss_cells: set = set(range(1, size * size + 1))
+        self.excluded_death_cells: set = set(range(1, size * size + 1))
         self.damage_cells: set = set()
-        self.alive_ship_list = [4, 3, 3, 2, 2, 2, 1, 1, 1, 1]
+        self.alive_ships: list = [4, 3, 3, 2, 2, 2, 1, 1, 1, 1]
 
     @property
     def size(self):
@@ -171,11 +172,11 @@ class Game:
             ship.cells_state[num_cell_id] = 2
             self._upd_field()
             self.damage_cells.add(cell_id)
+            self.excluded_death_cells.discard(cell_id)
             return ship
         else:
             self._miss_field[y - 1][x - 1] = 3
-            if cell_id in self.support_free_cells:
-                self.support_free_cells.remove(cell_id)
+            self.excluded_miss_cells.discard(cell_id)
             return
 
     def get_field_for_owner(self) -> list[list[int]]:
