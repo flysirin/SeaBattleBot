@@ -23,7 +23,7 @@ class Ship:
         return self._x, self._y
 
     def move(self, go: int):  # move ship, example: -1 or 1
-        if any(x == 2 for x in self.cells_state):
+        if any(x in (2, 4) for x in self.cells_state):
             self._is_move = False
             return False
         self._x = self._x + go * self._tp
@@ -58,14 +58,14 @@ class Ship:
         return False
 
     def is_death(self):
-        return all(cell == 2 for cell in self.cells_state)
+        return all(cell in (2, 4) for cell in self.cells_state)
 
     def __getitem__(self, index):  # get condition ship cell
         return self.cells_state[index]
 
     def __setitem__(self, index, value):  # set condition ship cell
-        if value != 2:
-            raise ValueError("Expected type int = 2")
+        if value not in (2, 4):
+            raise ValueError("Expected type int = 2  or 4")
         self.cells_state[index] = value
         self._is_move = False
 
@@ -158,7 +158,7 @@ class Game:
                     return ship
 
     def damage_register(self, x: int = None, y: int = None, cell_id: int = None):
-        """x,y ∈ [1-field_size]. 1 - for ship, 2 - for damage, 3 - for miss"""
+        """x,y ∈ [1-field_size]. 1 - for ship, 2 - for damage, 3 - for miss, 4 - for death"""
         if x and y:
             cell_id = (y - 1) * self._size + x
         elif cell_id:
@@ -170,20 +170,26 @@ class Game:
             ship._is_move = False
             num_cell_id = sorted(ship.ship_cells).index(cell_id)
             ship.cells_state[num_cell_id] = 2
-            self._upd_field()
             self.damage_cells.add(cell_id)
             self.excluded_death_cells.discard(cell_id)
+
+            if ship.is_death():
+                for i, cell_state in enumerate(ship.cells_state):
+                    ship.cells_state[i] = 4
+
+            self._upd_field()
             return ship
         else:
             self._miss_field[y - 1][x - 1] = 3
             self.excluded_miss_cells.discard(cell_id)
+            self._upd_field()
             return
 
     def get_field_for_owner(self) -> list[list[int]]:
         res_field = [[0 for _ in range(self._size)] for _ in range(self._size)]
         for y in range(self._size):
             for x in range(self._size):
-                if self._field[y][x] in (1, 2):
+                if self._field[y][x] in (1, 2, 4):
                     res_field[y][x] = self._field[y][x]
                 else:
                     res_field[y][x] = self._miss_field[y][x]
@@ -193,18 +199,8 @@ class Game:
         res_field = [[0 for _ in range(self._size)] for _ in range(self._size)]
         for y in range(self._size):
             for x in range(self._size):
-                if self._field[y][x] == 2:
-                    res_field[y][x] = 2
+                if self._field[y][x] in (2, 4):
+                    res_field[y][x] = self._field[y][x]
                 else:
                     res_field[y][x] = self._miss_field[y][x]
         return res_field
-
-# pole = Game(10)
-# pole.init()
-# print(pole.get_ships())
-# pole.show()
-# pole.move_ships()
-# print()
-# pole.show()
-# print()
-# print(pole.get_ships())

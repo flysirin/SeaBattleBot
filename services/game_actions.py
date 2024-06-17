@@ -25,6 +25,9 @@ def game_action(x_owner_hit=None, y_owner_hit=None,
                 image_left_from_enemy.draw_hit(x, y)
             elif cell == 3:
                 image_left_from_enemy.draw_miss(x, y)
+            elif cell == 4:
+                image_left_from_enemy.draw_ship(x, y)
+                image_left_from_enemy.draw_hit(x, y)
 
     for y, row in enumerate(right_field_from_owner, 1):
         for x, cell in enumerate(row, 1):
@@ -35,6 +38,9 @@ def game_action(x_owner_hit=None, y_owner_hit=None,
                 image_right_from_owner.draw_miss(x, y)
             elif cell == 1:
                 image_right_from_owner.draw_ship(x, y)
+            elif cell == 4:
+                image_right_from_owner.draw_ship(x, y)
+                image_right_from_owner.draw_hit(x, y)
 
     image = image_left_from_enemy.compare_two_images(image_right_from_owner)
     return image
@@ -106,10 +112,6 @@ def get_next_hit_by_few_damage_cells(game_field: 'Game') -> int | None:
             if next_cell_id in game_field.excluded_death_cells:
                 return next_cell_id
 
-        # next_cell_id = max(cell_ids) + 1
-        # if next_cell_id not in game_field.excluded_miss_cells:
-        #     next_cell_id = min(cell_ids) - 1
-
     elif cell_ids[1] - cell_ids[0] == game_field.size:
         possible_next_cells = [max(cell_ids) + game_field.size, min(cell_ids) - game_field.size]
 
@@ -134,19 +136,20 @@ def remove_cells_death_ship(game_field: 'Game', ship: 'Ship') -> None:
     game_field.damage_cells.clear()
 
 
-game_1 = Game(10)
-game_2 = Game(10)
-game_1.init()
-game_2.init()
-
-image1 = None
-for i in range(100):
-    image1 = game_action(randint(1, 10), randint(1, 10),
-                         game_1, game_2)
-    game_1.move_ships()
-    game_2.move_ships()
-image1.save('image1.png')
-print(game_1.excluded_miss_cells)
-print(game_1.excluded_death_cells)
-print(game_1.alive_ships)
-print(game_1.damage_cells)
+# game_1 = Game(10)
+# game_2 = Game(10)
+# game_1.init()
+# game_2.init()
+#
+# image1 = None
+# for i in range(50):
+#     image1 = game_action(randint(1, 10), randint(1, 10),
+#                          game_1, game_2)
+#     game_1.move_ships()
+#     game_2.move_ships()
+# image1.save('image1.png')
+# print(game_1.excluded_miss_cells)
+# print(game_1.excluded_death_cells)
+# print(game_1.alive_ships)
+# print(game_1.damage_cells)
+# print(game_2.get_field_for_enemy())
